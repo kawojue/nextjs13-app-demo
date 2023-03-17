@@ -1,5 +1,5 @@
+import Header from './Header'
 import '../styles/globals.css'
-import Header from './Navbar'
 export const metadata = {
   title: 'Next.js 13',
   description: 'Demo - Working with the appDir.',
