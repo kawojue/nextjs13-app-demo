@@ -8,6 +8,7 @@ export default function RootLayout({
     return (
         <main className="flex">
             <div>
+                {/* @ts-ignore */}
                 <TodosList />
             </div>
             <div className="flex-1">
