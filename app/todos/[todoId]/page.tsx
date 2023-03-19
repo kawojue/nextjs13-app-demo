@@ -1,11 +1,5 @@
-import { Todo } from '../../../types'
+import { Todo, PageProps } from '../../../types'
 import { notFound } from 'next/navigation'
-
-type PageProps = {
-    params: {
-        todoId: string
-    }
-}
 
 const fetchTodo = async (id: string) => {
     const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`,
