@@ -1,15 +1,14 @@
-import { Todo, PageProps } from '../../../types'
 import { notFound } from 'next/navigation'
+import { Todo, PageProps } from '../../../types'
+
+const URL:string = "https://jsonplaceholder.typicode.com/todos"
 
 const fetchTodo = async (id: string) => {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`,
-    { next: { revalidate: 60 } })
-    const todo: Todo = await res.json()
-    return todo
+    return await fetch(`${URL}/${id}`, { next: { revalidate: 60 } }).then(res => res.json())
 }
 
 async function TodoPage({ params: { todoId } }: PageProps) {
-    const todo: Todo = await fetchTodo(todoId)
+    const todo = await fetchTodo(todoId)
 
     if (!todo.id) return notFound()
 
@@ -29,8 +28,7 @@ async function TodoPage({ params: { todoId } }: PageProps) {
 }
 
 export async function generateStaticParams() {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/todos/`)
-    const todos: Todo[] = await res.json()
+    const todos: Todo[] = await fetch(URL).then(res => res.json())
     return todos.map((todo: Todo) => {
         todoId: todo.id.toString()
     })
